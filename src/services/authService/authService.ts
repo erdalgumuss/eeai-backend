@@ -27,7 +27,7 @@ export const createCompany = async (data: {
 
   await newCompany.save();
 
-  //// JWT Token oluştur
+  // JWT Token oluştur
   return generateToken({
     id: newCompany.id,
     companyName: newCompany.companyName,
