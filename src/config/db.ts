@@ -8,7 +8,7 @@ const connectDB = async (): Promise<void> => {
     }
 
     // MongoDB bağlantısı
-    const conn = await mongoose.connect(mongoURI); // Ek seçenekler artık gerekli değil
+    const conn = await mongoose.connect(mongoURI);
 
     console.log(`MongoDB Bağlandı: ${conn.connection.host}`);
     console.log(`Veritabanı Adı: ${conn.connection.name}`);
@@ -26,7 +26,11 @@ const connectDB = async (): Promise<void> => {
       console.error('MongoDB: Hata oluştu', error);
     });
   } catch (error) {
-    console.error(`Veritabanı Bağlantı Hatası: ${error.message}`);
+    if (error instanceof Error) {
+      console.error(`Veritabanı Bağlantı Hatası: ${error.message}`);
+    } else {
+      console.error('Bilinmeyen bir hata oluştu', error);
+    }
     process.exit(1); // Kritik hata durumunda uygulamayı durdur
   }
 };

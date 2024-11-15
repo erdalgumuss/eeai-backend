@@ -11,3 +11,10 @@ export const comparePassword = async (
 ): Promise<boolean> => {
   return bcrypt.compare(candidatePassword, hashedPassword);
 };
+(async () => {
+  const password = "erdal123"; // Girişte kullanılan şifre
+  const hashedPassword = "$2a$10$wO2/kN64GUwZ4lBKurdaCeTcxYb0VoP6ujdtjMW/CLiHHMxrvzdAK"; // Veritabanındaki hashlenmiş şifre
+
+  const isMatch = await bcrypt.compare(password, hashedPassword);
+  console.log("Şifre eşleşiyor mu?", isMatch); // true olmalı
+})();

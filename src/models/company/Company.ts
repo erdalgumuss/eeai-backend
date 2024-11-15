@@ -34,6 +34,14 @@ const CompanySchema: Schema = new Schema(
       type: Boolean,
       default: true,
     },
+    failedLoginAttempts: {
+      type: Number,
+      default: 0, // Başarısız giriş denemesi
+    },
+    accountLockedUntil: {
+      type: Date,
+      required: false, // Hesap kilitlenme süresi
+    },
   },
   {
     timestamps: true, // createdAt, updatedAt otomatik olarak eklenir

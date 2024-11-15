@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '../../utils/jwtUtils';
 
 const auth = (req: Request, res: Response, next: NextFunction): void => {
+  
   const authHeader = req.header('Authorization');
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -18,7 +19,7 @@ const auth = (req: Request, res: Response, next: NextFunction): void => {
     next();
   } catch (error) {
     res.status(401);
-    return next(new Error('Geçersiz token'));
+    return next(new Error('Geçersiz veya süresi dolmuş token'));
   }
 };
 

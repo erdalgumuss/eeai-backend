@@ -7,6 +7,8 @@ export const createCompany = async (data: {
   email: string;
   password: string;
 }): Promise<string> => {
+  const { email, companyName, password } = data;
+
   // Şirketin benzersiz olduğunu kontrol et
   const existingCompany = await Company.findOne({ email });
   if (existingCompany) {
@@ -14,11 +16,12 @@ export const createCompany = async (data: {
   }
 
   // Şifreyi hashle
-  const hashedPassword = await hashPassword(data.password);
+  const hashedPassword = await hashPassword(password);
 
   // Yeni şirket oluştur
   const newCompany = new Company({
-    ...data,
+    companyName,
+    email,
     password: hashedPassword,
   });
 
@@ -31,8 +34,8 @@ export const createCompany = async (data: {
   });
 };
 
+
 export const authenticateCompany = async (email: string, password: string): Promise<any> => {
-  // Şirketi email ile bul
   const company = await Company.findOne({ email });
   if (!company) {
     throw new Error('Geçersiz e-posta veya şifre');
@@ -42,7 +45,7 @@ export const authenticateCompany = async (email: string, password: string): Prom
     throw new Error('Hesap devre dışı bırakılmış');
   }
 
-  // Şifre kontrolü
+  // Şifre doğrulama
   const isMatch = await comparePassword(password, company.password);
   if (!isMatch) {
     throw new Error('Geçersiz e-posta veya şifre');

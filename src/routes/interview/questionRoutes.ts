@@ -3,15 +3,16 @@ import auth from '../../middlewares/auth/auth';
 import {
   addQuestion,
   listQuestions,
-  addMultipleQuestions,
+  listOwnQuestions,
+  listPublicQuestions,
   updateQuestion,
   deleteQuestion,
-  listPublicQuestions,
   getQuestionById,
   likeQuestion,
-  listOwnQuestions,
   createAIQuestion,
-  getSuggestedQuestions,
+  //getSuggestedQuestions,
+  filterQuestions,
+  getQuestionsByTags,
 } from '../../controllers/interview/questionController';
 
 const router = express.Router();
@@ -22,14 +23,11 @@ router.post('/add', auth, addQuestion);
 // Tüm soruları listeleme (public + kendi soruları)
 router.get('/list', auth, listQuestions);
 
-// Public soruları listeleme
-router.get('/list-public', listPublicQuestions);
-
 // Kendi sorularını listeleme
 router.get('/list-own', auth, listOwnQuestions);
 
-// Toplu soru ekleme
-router.post('/add-multiple', auth, addMultipleQuestions);
+// Public soruları listeleme
+router.get('/list-public', listPublicQuestions);
 
 // Soru güncelleme
 router.put('/update/:id', auth, updateQuestion);
@@ -47,7 +45,12 @@ router.post('/like/:id', auth, likeQuestion);
 router.post('/generate-ai', auth, createAIQuestion);
 
 // Önerilen soruları listeleme
-router.get('/suggest', auth, getSuggestedQuestions);
+//router.get('/suggest', auth, getSuggestedQuestions);
 
+// Soruları filtreleme (konu ve başlığa göre)
+router.get('/filter', auth, filterQuestions);
+
+// Etiketlere göre soruları listeleme
+router.get('/tags', auth, getQuestionsByTags);
 
 export default router;
