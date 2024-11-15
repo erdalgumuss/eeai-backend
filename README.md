@@ -162,4 +162,4 @@ JWT tabanlı yetkilendirme
 Katkıda bulunmak için CONTRIBUTING.md dosyasını kontrol edin.
 
 Lisans
-Bu proje EEAI Lisansı altında lisanslanmıştır.
+Bu proje EEAI Lisansı altında lisanslanmıştır..
