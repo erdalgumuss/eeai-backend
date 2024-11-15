@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS", // "ESNext" yerine "CommonJS" önerilir
+    "strict": true,
+    "esModuleInterop": true, // CommonJS modülleriyle uyum için
+    "skipLibCheck": true, // Kütüphane denetimlerini atlar
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "moduleResolution": "node" // Modül çözümleme yöntemi
+  },
+  "include": ["src/**/*", "server.ts"],
+  "exclude": ["node_modules"]
+}
